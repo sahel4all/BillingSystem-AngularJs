@@ -1,0 +1,61 @@
+CREATE TABLE IF NOT EXISTS user_roles
+(
+role_id SERIAL NOT NULL,
+role character varying(30),
+CONSTRAINT role_pkey PRIMARY KEY (role_id)
+);
+
+CREATE TABLE IF NOT EXISTS users
+( 
+user_id SERIAL NOT NULL,
+password character varying(100),
+email character varying(30) NOT NULL,
+mobile character varying(10),
+login_enabled boolean,
+role_id INTEGER NOT NULL ,
+CONSTRAINT users_pkey PRIMARY KEY (user_id),
+CONSTRAINT user_roles_fkey FOREIGN KEY (role_id)
+REFERENCES user_roles (role_id) MATCH SIMPLE
+ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+
+CREATE TABLE IF NOT EXISTS user_address
+(
+user_id integer NOT NULL,
+address_line1 character varying(30),
+address_line2 character varying(30),
+city character varying(20),
+state character varying(30),
+country character varying(20),
+pincode character varying(8),
+CONSTRAINT user_address_pkey PRIMARY KEY (user_id),
+CONSTRAINT user_address_fkey FOREIGN KEY (user_id)
+REFERENCES users (user_id) MATCH SIMPLE
+ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+
+CREATE TABLE IF NOT EXISTS products
+(
+product_id SERIAL NOT NULL,
+product_name character varying(30),
+quantity integer,
+amount numeric(15,6),
+description character varying(50),
+CONSTRAINT products_pkey PRIMARY KEY (product_id)
+)
+
+CREATE TABLE IF NOT EXISTS transaction_details
+(
+user_id integer NOT NULL,
+product_id NOT NULL,
+amount numeric(15,6),
+created_dt date,
+CONSTRAINT cashier_txn_details_pkey PRIMARY KEY (user_id),
+CONSTRAINT cashier_txn_details_fkey1 FOREIGN KEY (user_id)
+REFERENCES users (user_id) MATCH SIMPLE
+ON UPDATE NO ACTION ON DELETE NO ACTION,
+CONSTRAINT cashier_txn_details_fkey2 FOREIGN KEY (product_id)
+REFERENCES products (product_id) MATCH SIMPLE
+ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+
