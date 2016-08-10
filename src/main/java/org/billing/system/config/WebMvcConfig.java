@@ -18,7 +18,7 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "org.billing.system")
-//Import({TemplateConfig.class, ApplicationConfig.class})
+@Import(ApplicationConfig.class)
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     @Override

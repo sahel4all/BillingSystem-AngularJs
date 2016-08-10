@@ -38,11 +38,13 @@ CREATE TABLE IF NOT EXISTS products
 (
 product_id SERIAL NOT NULL,
 product_name character varying(30),
-quantity integer,
-amount numeric(15,6),
-description character varying(50),
+product_quantity integer,
+product_cost numeric(15,6),
+product_description character varying(50),
 CONSTRAINT products_pkey PRIMARY KEY (product_id)
 )
+
+insert into products values (1,'Lux soaps',100,30, 'lux soaps.');
 
 CREATE TABLE IF NOT EXISTS transaction_details
 (

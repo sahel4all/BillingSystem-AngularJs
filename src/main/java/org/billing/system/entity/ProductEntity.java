@@ -21,11 +21,11 @@ public class ProductEntity {
     private Long id;
     @Column(name = "product_name")
     private String name;
-    @Column(name = "product_quantity")
+    @Column//(name = "product_quantity")
     private int quantity;
-    @Column(name = "product_cost")
+    @Column///(name = "product_cost")
     private float amount;
-    @Column(name = "product_description")
+    @Column//(name = "product_description")
     private String description;
 
     public Long getId() {

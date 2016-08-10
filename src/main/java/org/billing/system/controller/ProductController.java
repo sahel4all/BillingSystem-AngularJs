@@ -5,6 +5,7 @@ import org.billing.system.repository.ProductRepository;
 import org.billing.system.service.ProductService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ public class ProductController {
      * Logger for this class.
      */
     private static final Logger LOGGER = LoggerFactory.getLogger(ProductController.class);
+
     @Autowired
     private ProductService productService;
 
