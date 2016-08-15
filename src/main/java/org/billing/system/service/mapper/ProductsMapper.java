@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by msahel on 8/8/2016.
  */
@@ -20,4 +23,14 @@ public class ProductsMapper {
         Product product=modelMapper.map(productEntity,Product.class);
         return product;
     }
+
+   public List<Product> mapProductEntitiesToProduct(Iterable<ProductEntity> productEntities){
+       List<Product> products=new ArrayList<Product>();
+       Product product;
+        for (ProductEntity productEntity:productEntities){
+            product=modelMapper.map(productEntity,Product.class);
+            products.add(product);
+        }
+       return products;
+   }
 }

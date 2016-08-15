@@ -11,6 +11,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by msahel on 8/8/2016.
  */
@@ -25,5 +27,10 @@ public class ProductService  {
        // CrudRepository c=new CrudRepository();
         ProductEntity entity=productRepository.findOne(id);
         return productsMapper.mapProductEntityToProduct(entity);
+    }
+
+    public List<Product> getAllProducts (){
+        Iterable<ProductEntity> entities=productRepository.findAll();
+        return productsMapper.mapProductEntitiesToProduct(entities);
     }
 }

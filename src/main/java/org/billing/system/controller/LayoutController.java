@@ -11,4 +11,7 @@ public class LayoutController {
 
     @RequestMapping("product/layout")
     public String getProductLayoutPage(){return "product/layout";}
+
+    @RequestMapping("products/layout")
+    public String getAllProductLayoutPage(){return "products/layout";}
 }

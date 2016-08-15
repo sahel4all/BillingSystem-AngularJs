@@ -14,6 +14,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 
+import java.util.List;
+
 /**
  * Created by msahel on 8/7/2016.
  */
@@ -41,5 +43,11 @@ public class ProductController {
             //LOGGER.error(" Error occurred while fetching patient id {} : {} ",id, e.getMessage());
             return new ResponseEntity("No product found:", HttpStatus.NOT_FOUND);
         }
+    }
+
+    @RequestMapping(value="/products", method=RequestMethod.GET)
+    public List<Product> getAllProducts(){
+        List<Product> products=productService.getAllProducts();
+        return products;
     }
 }

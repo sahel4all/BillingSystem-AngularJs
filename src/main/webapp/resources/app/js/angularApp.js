@@ -10,5 +10,9 @@ mainApp.config(['$routeProvider','$httpProvider', function ($routeProvider, $htt
         templateUrl:'product/layout',
         controller: ProductController
     }).
+   when('/products',{
+        templateUrl:'products/layout',
+        controller: ProductsController
+    }).
     otherwise('/BMS');
 }]);
