@@ -1,0 +1,27 @@
+{
+  "name": "angular-age-filter",
+  "version": "1.0.0",
+  "description": "An angular filter that converts date to age",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS",
+    "uglify": "uglifyjs angular-age-filter.js --mangle --compress -o angular-age-filter.min.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/srph/angular-age-filter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/srph/angular-age-filter/issues"
+  },
+  "homepage": "https://github.com/srph/angular-age-filter",
+  "devDependencies": {
+    "jasmine-core": "^2.1.3",
+    "karma": "^0.12.31",
+    "karma-jasmine": "^0.3.4",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "uglify-js": "^2.4.16"
+  }
+}

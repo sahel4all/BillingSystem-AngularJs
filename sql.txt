@@ -45,6 +45,7 @@ CONSTRAINT products_pkey PRIMARY KEY (product_id)
 )
 
 insert into products values (1,'Lux soaps',100,30, 'lux soaps.');
+insert into products values (2,'Paste',200,320, 'Pastess');
 
 CREATE TABLE IF NOT EXISTS transaction_details
 (

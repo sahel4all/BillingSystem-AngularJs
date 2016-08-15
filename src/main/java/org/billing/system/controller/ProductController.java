@@ -29,15 +29,16 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @RequestMapping(value="/product/{id}",method = RequestMethod.GET)
-    public ResponseEntity getProducts(@PathVariable final long id){
+    @RequestMapping(value="/product/1",method = RequestMethod.GET)
+    //public ResponseEntity getProducts(@PathVariable final long id){
+    public ResponseEntity getProducts(){
         try{
             System.out.println("From Controller");
-            Product product=productService.getProductDetails(id);
+            Product product=productService.getProductDetails(Long.valueOf("1"));
             return new ResponseEntity(product,HttpStatus.OK);
         }
         catch(Exception e){
-            LOGGER.error(" Error occurred while fetching patient id {} : {} ",id, e.getMessage());
+            //LOGGER.error(" Error occurred while fetching patient id {} : {} ",id, e.getMessage());
             return new ResponseEntity("No product found:", HttpStatus.NOT_FOUND);
         }
     }

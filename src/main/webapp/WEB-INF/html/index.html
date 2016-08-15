@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" ng-app = "BMSApp">
+<head>
+    <title>Welcome to Billing Management System</title>
+</head>
+<body>
+<script src="resources/bower_components/angular/angular.min.js"></script>
+<script src="resources/app/js/angularApp.js"></script>
+<script src="resources/bower_components/angular-route/angular-route.min.js"></script>
+<script src="resources/app/js/controllers/ProductController.js"></script>
+<a href="#/product/1" > Get Products </a>
+<ng-view >{{product.name}} </ng-view>
+<button type="submit" ng-click="getProduct(1)">click pls</button>
+</body>
+</html>
