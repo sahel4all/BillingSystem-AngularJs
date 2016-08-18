@@ -14,6 +14,10 @@ mainApp.config(['$routeProvider','$httpProvider', function ($routeProvider, $htt
         templateUrl:'products/layout',
         controller: ProductsController
     }).
+    when('/product/:id',{
+        templateUrl: 'product/layout',
+        controller: ProductController
+    }).
     otherwise('/BMS');
 }]).filter('searchProductInfoFilter',function () {
     return function (arr,key) {
@@ -34,4 +38,15 @@ mainApp.config(['$routeProvider','$httpProvider', function ($routeProvider, $htt
         return returnArr;
     }
     
-});
+}).service('ProductService',['$http','$q',function ($http,$q) {
+    var deferred=$q.defer();
+
+    this.addProducts=function (product) {
+    $http.put('product',product,{}).success(function (response) {
+        deferred.resolve(response);
+    }).error(function (message) {
+        deferred.reject(message);
+    });
+        return deferred.promise;
+    };
+}]);

@@ -50,4 +50,10 @@ public class ProductController {
         List<Product> products=productService.getAllProducts();
         return products;
     }
+
+    @RequestMapping(value="/product",method = RequestMethod.PUT)
+    public ResponseEntity addProduct(@RequestBody final Product product){
+        Product productNew=productService.insertProduct(product);
+        return new ResponseEntity(product,HttpStatus.OK);
+    }
 }

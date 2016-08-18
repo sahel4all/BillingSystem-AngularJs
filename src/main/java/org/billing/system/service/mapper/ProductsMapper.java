@@ -33,4 +33,19 @@ public class ProductsMapper {
         }
        return products;
    }
+
+//    public Iterable<ProductEntity> mapProductToProductEntities(List<Product>){
+//        List<Product> products=new ArrayList<Product>();
+//        Product product;
+//        for (ProductEntity productEntity:productEntities){
+//            product=modelMapper.map(productEntity,Product.class);
+//            products.add(product);
+//        }
+//        return products;
+//    }
+
+    public ProductEntity mapProductToProductEntity (Product product){
+        ProductEntity productEntity= modelMapper.map(product,ProductEntity.class);
+        return productEntity;
+    }
 }

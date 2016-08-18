@@ -33,4 +33,9 @@ public class ProductService  {
         Iterable<ProductEntity> entities=productRepository.findAll();
         return productsMapper.mapProductEntitiesToProduct(entities);
     }
+
+    public Product insertProduct( Product product){
+        ProductEntity entity=productRepository.save(productsMapper.mapProductToProductEntity(product));
+        return productsMapper.mapProductEntityToProduct(entity);
+    }
 }

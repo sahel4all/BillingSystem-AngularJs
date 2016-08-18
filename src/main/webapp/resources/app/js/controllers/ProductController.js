@@ -1,11 +1,27 @@
 'use strict'
 
-var ProductController=function($scope,$http,$routeParams){
+var ProductController=function($scope,$http,$routeParams,ProductService){
 
     $scope.getProduct= function(){
-        $http.get('product/1').success(function(product){
-            $scope.product=product;
-        });
+        //alert($routeParams.id);
+        if ($routeParams.id!=='add'){
+            $http.get('product/1').success(function(product){
+                $scope.product=product;
+            });
+        }
     };
     $scope.getProduct();
+
+    $scope.addProduct=function (product) {
+        var promise=ProductService.addProducts(product);
+
+        promise.then(function (response) {
+            $scope.product=response;
+            alert('Product Added Successfully.');
+        },
+        function (error) {
+            alert(error);
+            $scope.setError(error);
+        });
+    };
 };
