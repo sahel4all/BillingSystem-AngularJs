@@ -1,0 +1,74 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form class="form-horizontal" name="billForm">
+                <div class="form-group control-label col-xs-10">
+
+                    <label for="billnoNO" class="control-label col-xs-4" >Bill No :</label>
+                    <div class="col-sm-4">
+                        <input type="text" id="billnoNO" ng-model="product.billNo" class="form-control"   />
+                    </div >
+                </div>
+                <div class="form-group control-label col-xs-10">
+
+                    <label for="product_ID" class="control-label col-xs-4" >Product Id :</label>
+                    <div class="col-sm-4">
+                        <input type="text" id="product_ID" ng-model="product.id" class="form-control"   />
+                    </div >
+                </div>
+                <div class="form-group control-label col-xs-10">
+
+                    <label for="product_name" class="control-label col-xs-4" >Product Name :</label>
+                    <div class="col-sm-6">
+                        <input type="text" id="product_name" ng-model="product.name" class="form-control"   />
+                    </div >
+                </div>
+                <div class="form-group control-label col-xs-10">
+
+                    <label for="product_price" class="control-label col-xs-4" >Product Price :</label>
+                    <div class="col-sm-4">
+                        <input type="text" id="product_price" ng-model="product.price" class="form-control"   />
+                    </div >
+                </div>
+                <div class="form-group control-label col-xs-10">
+
+                    <label for="product_discount" class="control-label col-xs-4" >Discount :</label>
+                    <div class="col-sm-4">
+                        <input type="text" id="product_discount" ng-model="product.discount" class="form-control"   />
+                    </div >
+                </div>
+
+                <div class="form-group control-label col-xs-10">
+                    <div class="col-sm-4 col-sm-offset-2">
+                        <button type="submit" class="btn btn-primary" ng-click="addBillDetails(product)" class="form-control"> Add </button>
+                    </div >
+                </div>
+
+            </form>
+        </div>
+        <div class="col-md-6">
+            <table ng-repeat="product in products" class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Product Id</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Discount</th>
+                        <th>Price (per item)</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>product.id</td>
+                        <td>product.name</td>
+                        <td>product.quantity</td>
+                        <td>product.discount</td>
+                        <td>product.price</td>
+                        <td>product.total</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

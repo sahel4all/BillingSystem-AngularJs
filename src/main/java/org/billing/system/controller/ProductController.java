@@ -31,12 +31,12 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @RequestMapping(value="/product/1",method = RequestMethod.GET)
-    //public ResponseEntity getProducts(@PathVariable final long id){
-    public ResponseEntity getProducts(){
+    @RequestMapping(value="/product/{id}",method = RequestMethod.GET)
+    public ResponseEntity getProducts(@PathVariable final long id){
+    //public ResponseEntity getProducts(){
         try{
             System.out.println("From Controller");
-            Product product=productService.getProductDetails(Long.valueOf("1"));
+            Product product=productService.getProductDetails(id);
             return new ResponseEntity(product,HttpStatus.OK);
         }
         catch(Exception e){

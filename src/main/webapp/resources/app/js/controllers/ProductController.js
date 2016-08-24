@@ -3,9 +3,9 @@
 var ProductController=function($scope,$http,$routeParams,ProductService){
 
     $scope.getProduct= function(){
-        //alert($routeParams.id);
+        alert($routeParams.id);
         if ($routeParams.id!=='add'){
-            $http.get('product/1').success(function(product){
+            $http.get('product/'+$routeParams.id).success(function(product){
                 $scope.product=product;
             });
         }
@@ -17,7 +17,7 @@ var ProductController=function($scope,$http,$routeParams,ProductService){
 
         promise.then(function (response) {
             $scope.product=response;
-            alert('Product Added Successfully.');
+            alert('Product Added/Updated Successfully.');
         },
         function (error) {
             alert(error);

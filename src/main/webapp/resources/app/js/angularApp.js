@@ -6,10 +6,6 @@ var mainApp=angular.module('BMSApp',['ngRoute']);
 
 mainApp.config(['$routeProvider','$httpProvider', function ($routeProvider, $httpProvider) {
     $routeProvider.
-    when('/product/1',{
-        templateUrl:'product/layout',
-        controller: ProductController
-    }).
    when('/products',{
         templateUrl:'products/layout',
         controller: ProductsController
@@ -17,6 +13,10 @@ mainApp.config(['$routeProvider','$httpProvider', function ($routeProvider, $htt
     when('/product/:id',{
         templateUrl: 'product/layout',
         controller: ProductController
+    }).
+    when('/bill',{
+       templateUrl:'bill/layout',
+        controller:BillController
     }).
     otherwise('/BMS');
 }]).filter('searchProductInfoFilter',function () {

@@ -1,12 +1,18 @@
 <div class="container" style="margin-bottom: 10px;" >
 
 </div>
+<div class="container" style="margin-bottom: 10px;" >
+
+</div>
+<div class="container" style="margin-bottom: 10px;" >
+
+</div>
 <div class="container">
     <section style="margin: 50px">
         <span class="row"><input type="text" ng-model="searchKey" placeholder="Product ID or Name"/></span>
     <div ng-repeat ="product in products|searchProductInfoFilter:searchKey">
         <div class="row">
-            <div class="col-sm-2">{{product.id}}</div>
+            <div class="col-sm-2"><a href="#/product/{{product.id}}">{{product.id}}</a></div>
             <div class="col-sm-4">{{product.name}}</div>
             <div class="col-sm-2">{{product.quantity}}</div>
             <div class="col-sm-1">{{product.amount}}</div>
