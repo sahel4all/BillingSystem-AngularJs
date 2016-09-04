@@ -49,4 +49,49 @@ mainApp.config(['$routeProvider','$httpProvider', function ($routeProvider, $htt
     });
         return deferred.promise;
     };
+}]).directive('fetchProducts',['productHelper',function (productHelper) {
+    return{
+        restrict:'AE',
+        require: 'ngModel',
+        transclude:'true',
+        replace: true,
+      //  scope: {id: '=', name: '=', quantity: '=',discount: '=',price: '=',total: '='},
+
+        link: function (scope,element,attrs,ngModel) {
+            var promise="";
+            element.bind('blur',function ($http) {
+                if(scope.product.id<=0) return;
+
+                promise=productHelper.fetchDetails(scope.product.id);
+
+                promise.then(function (response) {
+                        scope.product.amount=response.data.amount;
+                        scope.product.name=response.data.name;
+                        scope.product.quantity=response.data.quantity;
+                    }
+                    );
+            });
+
+            element.bind('focus',function ($http) {
+                scope.product.amount="";
+                scope.product.name="";
+                scope.product.quantity="";
+            });
+
+        }
+    }
+}]).service('productHelper',['$http','$q',function ($http,$q) {
+    var deferred=$q.defer();
+
+    this.fetchDetails=function (id) {
+        $http.get('product/'+id).then(function (response) {
+            deferred.resolve(response);
+            alert("response.data.name in productHelper:"+response.data.name );
+        },function (response) {
+            deferred.reject(response);
+        })
+
+        return deferred.promise;
+    };
+
 }]);
