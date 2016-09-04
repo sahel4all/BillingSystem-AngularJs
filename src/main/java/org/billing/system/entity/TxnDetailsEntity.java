@@ -21,6 +21,7 @@ public class TxnDetailsEntity {
     private String name;
     private float discount;
     private int quantity;
+    @Column(name="total_amount")
     private float totalAmount;
 
     public Long getId() {

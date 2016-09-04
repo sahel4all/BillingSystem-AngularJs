@@ -1,6 +1,6 @@
 'use strict'
 
-var BillController=function ($http,$scope) {
+var BillController=function ($http,$scope,GenerateBillService) {
     $scope.collection=[];
     $scope.forms = [{
         name: "billForm",
@@ -19,9 +19,17 @@ var BillController=function ($http,$scope) {
         $scope.collection.push(productObj);
         $scope.product='';
 
-    }
-    $scope.generateBill=function () {
-        
+    };
+    $scope.generateBill=function (collection) {
+            var promise=GenerateBillService.generateBill(collection);
 
-    }
+        promise.then(function (response) {
+                response.data;
+                alert('Bill generated Successfully.');
+            },
+            function (error) {
+                alert(error);
+                $scope.setError(error);
+            });
+    };
 };

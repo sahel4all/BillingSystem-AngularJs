@@ -86,7 +86,7 @@ mainApp.config(['$routeProvider','$httpProvider', function ($routeProvider, $htt
     this.fetchDetails=function (id) {
         $http.get('product/'+id).then(function (response) {
             deferred.resolve(response);
-            alert("response.data.name in productHelper:"+response.data.name );
+            //alert("response.data.name in productHelper:"+response.data.name );
         },function (response) {
             deferred.reject(response);
         })
@@ -94,4 +94,30 @@ mainApp.config(['$routeProvider','$httpProvider', function ($routeProvider, $htt
         return deferred.promise;
     };
 
+}]).service('GenerateBillService',['$http','$q',function ($http,$q) {
+    var deferred=$q.defer();
+
+    this.generateBill=function (products) {
+        var txnDetails={};
+        var coll=[];
+
+        products.forEach(myFunc);
+
+        function myFunc(item,index){
+            txnDetails.id=item.id;
+            txnDetails.name=item.name;
+            txnDetails.quantity=item.quantity;
+            txnDetails.discount=item.discount;
+            txnDetails.totalAmount=item.total;
+            coll.push(txnDetails);
+        }
+
+
+        $http.put('generateBill',coll,{}).success(function (response) {
+            deferred.resolve(response);
+        }).error(function (message) {
+            deferred.reject(message);
+        });
+        return deferred.promise;
+    };
 }]);

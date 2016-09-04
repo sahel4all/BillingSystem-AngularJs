@@ -49,16 +49,14 @@ insert into products values (2,'Paste',200,320, 'Pastess');
 
 CREATE TABLE IF NOT EXISTS transaction_details
 (
-user_id integer NOT NULL,
 product_id NOT NULL,
-amount numeric(15,6),
-created_dt date,
-CONSTRAINT cashier_txn_details_pkey PRIMARY KEY (user_id),
-CONSTRAINT cashier_txn_details_fkey1 FOREIGN KEY (user_id)
-REFERENCES users (user_id) MATCH SIMPLE
-ON UPDATE NO ACTION ON DELETE NO ACTION,
+product_name character varying(30),
+discount integer,
+quantity integer,
+totalAmount numeric(15,6),
 CONSTRAINT cashier_txn_details_fkey2 FOREIGN KEY (product_id)
 REFERENCES products (product_id) MATCH SIMPLE
 ON UPDATE NO ACTION ON DELETE NO ACTION
 )
+
 

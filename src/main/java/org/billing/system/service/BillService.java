@@ -7,6 +7,8 @@ import org.billing.system.service.mapper.BillMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by msahel on 8/24/2016.
  */
@@ -17,8 +19,9 @@ public class BillService {
     @Autowired
     BillMapper billMapper;
 
-    public TxnDetails insertTxnDetails (TxnDetails txnDetails){
-        TxnDetailsEntity txnDetailsEntity= billMapper.mapTxnDetailToTxnDetailEntity(txnDetails);
-        return billMapper.mapTxnDetailToEntityTxnDetail(billRepository.save( txnDetailsEntity)) ;
+    public List<TxnDetails> insertTxnDetails (List<TxnDetails> txnDetails){
+        List<TxnDetailsEntity> txnDetailsEntities= billMapper.mapTxnDetailListToTxnDetailEntity(txnDetails);
+        Iterable<TxnDetailsEntity> txnDetailsEntitiesNew =billRepository.save(txnDetailsEntities);
+        return billMapper.mapTxnDetailListToEntityTxnDetail((List<TxnDetailsEntity>) txnDetailsEntitiesNew) ;
     }
 }
