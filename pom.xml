@@ -7,7 +7,7 @@
     <groupId>org.billing.system</groupId>
     <artifactId>billing-system-web-app</artifactId>
     <version>1.0</version>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
 
     <name>billing-system-web-app</name>
     <description>Billing automation system</description>

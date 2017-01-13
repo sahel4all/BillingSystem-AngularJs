@@ -37,10 +37,15 @@ ON UPDATE NO ACTION ON DELETE NO ACTION
 CREATE TABLE IF NOT EXISTS products
 (
 product_id SERIAL NOT NULL,
-product_name character varying(30),
-product_quantity integer,
-product_cost numeric(15,6),
-product_description character varying(50),
+name character varying(50),
+short_name character varying(15),
+quantity integer,
+discount numeric(15,6),
+buying_cost numeric(15,6),
+selling_cost numeric(15,6),
+mrp numeric(15,6),
+margin_amount numeric(15,6),
+margin_percentage numeric(15,6),
 CONSTRAINT products_pkey PRIMARY KEY (product_id)
 )
 

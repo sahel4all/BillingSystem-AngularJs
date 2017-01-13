@@ -120,4 +120,59 @@ mainApp.config(['$routeProvider','$httpProvider', function ($routeProvider, $htt
         });
         return deferred.promise;
     };
-}]);
+}]).directive('calculateMargin',['productHelper',function (productHelper) {
+    return{
+        restrict:'AE',
+        require: 'ngModel',
+        transclude:'true',
+        replace: true,
+        //  scope: {id: '=', name: '=', quantity: '=',discount: '=',price: '=',total: '='},
+
+        link: function (scope,element,attrs,ngModel) {
+            var promise="";
+            element.bind('blur',function ($http) {
+                if(scope.product.buying_cost<=0 || scope.product.selling_cost<=0) return;
+
+                scope.product.margin_amount=scope.product.selling_cost-scope.product.buying_cost;
+                scope.product.margin_percentage=((scope.product.selling_cost-scope.product.buying_cost)*100)/scope.product.buying_cost;
+            });
+
+            element.bind('focus',function ($http) {
+                scope.product.margin_amount="";
+                scope.product.margin_percentage="";
+            });
+
+        }
+    }
+}]).directive('calculateDiscountedSellingPrice',['productHelper',function (productHelper) {
+    return{
+        restrict:'AE',
+        require: 'ngModel',
+        transclude:'true',
+        replace: true,
+        //  scope: {id: '=', name: '=', quantity: '=',discount: '=',price: '=',total: '='},
+
+        link: function (scope,element,attrs,ngModel) {
+            var promise="";
+            element.bind('blur',function ($http) {
+                if(scope.product.discount.trim()=="" || scope.product.discount<=0) return;
+
+                scope.product.selling_cost=scope.product.selling_cost - ((scope.product.selling_cost*scope.product.discount)/100);
+            });
+
+            element.bind('focus',function ($http) {
+
+            });
+
+        }
+    }
+}]).constant('DEFAULT_INVOICE', {
+        tax: 13.00,
+        company_info: {
+            name: 'Smart Supermarket ',
+           // web_link: 'www.metawarelabs.com',
+            address1: 'Sunctiy',
+            address2: 'Hyderabad',
+            postal: '500086'
+        }
+    });

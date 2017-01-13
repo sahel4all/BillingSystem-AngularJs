@@ -53,7 +53,9 @@ public class ProductController {
 
     @RequestMapping(value="/product",method = RequestMethod.PUT)
     public ResponseEntity addProduct(@RequestBody final Product product){
+        System.out.println(product);
         Product productNew=productService.insertProduct(product);
+        System.out.println("productNew::"+productNew);
         return new ResponseEntity(product,HttpStatus.OK);
     }
 }

@@ -1,117 +1,106 @@
-<div class="container" style="margin-bottom: 10px;" >
 
-</div>
-<div class="container" style="margin-bottom: 10px;" >
-
-</div>
-<div class="container" style="margin-bottom: 10px;" >
-
-</div><div class="container" style="margin-bottom: 10px;" >
-
-</div>
-<div class="container" style="margin-bottom: 10px;" >
-
-</div>
-<div class="container" style="margin-bottom: 10px;" >
-
-</div>
-<div class="container" style="margin-bottom: 10px;" >
-
-</div>
-<div class="container" style="margin-bottom: 10px;" >
-
-</div>
-<div class="container" style="margin-bottom: 10px;" >
+<div class="container" style="margin-bottom: 100px;" >
 
 </div>
 
-<div class="container">
+
+<div class="container" width="800px" id="invoice" >
     <div class="row">
-        <div class="col-md-6">
-            <div class="carosel" id="carosel1" >
-                    <div class="form-group control-label col-xs-10">
-
-                        <label for="billnoNO" class="control-label col-xs-4" >Bill No :</label>
-                        <div class="col-sm-4">
-                            <input type="text" id="billnoNO" ng-model="product.billNo" class="form-control"   />
-                        </div >
-                    </div>
-                    <div class="form-group control-label col-xs-10">
-
-                        <label for="product_ID" class="control-label col-xs-4" >Product Id :</label>
-                        <div class="col-sm-4">
-                            <input type="text" fetch-products="" id="product_ID" ng-model="product.id" class="form-control"   />
-                        </div >
-                    </div>
-                    <div class="form-group control-label col-xs-10">
-
-                        <label for="product_name" class="control-label col-xs-4" >Product Name :</label>
-                        <div class="col-sm-6">
-                            <input type="text" id="product_name" ng-model="product.name" class="form-control"   />
-                        </div >
-                    </div>
-                    <div class="form-group control-label col-xs-10">
-
-                        <label for="product_price" class="control-label col-xs-4" >Product Price :</label>
-                        <div class="col-sm-4">
-                            <input type="text" id="product_price" ng-model="product.amount" class="form-control"   />
-                        </div >
-                    </div>
-                    <div class="form-group control-label col-xs-10">
-
-                        <label for="product_quanity" class="control-label col-xs-4" >Quantity :</label>
-                        <div class="col-sm-4">
-                            <input type="text" id="product_quanity" ng-model="product.quantity" class="form-control"   />
-                        </div >
-                    </div>
-                    <div class="form-group control-label col-xs-10">
-
-                        <label for="product_discount" class="control-label col-xs-4" >Discount :</label>
-                        <div class="col-sm-4">
-                            <input type="text" id="product_discount" ng-model="product.discount" ng-init="0" class="form-control"   />
-                        </div >
-                    </div>
-
-                    <div class="form-group control-label col-xs-10">
-                        <div class="col-sm-4 col-sm-offset-2">
-                            <button type="submit" class="btn btn-primary" ng-click="addBillDetails()" > Add </button>
-                        </div >
-                    </div>
-
+        <div class="col-xs-12 heading">
+            INVOICE
+        </div>
+    </div>
+    <div class="row branding">
+        <div class="col-xs-6">
+            <div class="invoice-number-container">
+                <label for="invoice-number">Invoice #</label><input type="text" id="invoice-number" ng-model="invoice.invoice_number" />
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="carosel" id="carosel2">
-                <form class="form-horizontal" name="billForm">
-                    <table  class="table table-hover table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Product Id</th>
-                                <th>Product Name</th>
-                                <th>Quantity</th>
-                                <th>Discount</th>
-                                <th>Price (per item)</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="product in collection">
-                                <td>{{product.id}}</td>
-                                <td>{{product.name}}</td>
-                                <td>{{product.quantity}}</td>
-                                <td>{{product.discount}}</td>
-                                <td>{{product.amount}}</td>
-                                <td>{{product.total}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="form-group control-label col-xs-10">
-                        <div class="col-sm-4 col-sm-offset-2">
-                            <button type="submit" class="btn btn-primary" ng-click="generateBill(collection)" > Bill </button>
-                        </div >
-                    </div>
-                </form>
+        <div class="col-xs-6 logo-container">
+            <input type="file" id="imgInp" />
+            <img ng-hide="logoRemoved" id="company_logo" ng-src="resources/images/logo.png" alt="your image" width="150" />
+            <div>
+                <div class="noPrint" ng-hide="printMode">
+                    <a ng-click="editLogo()" href="" >Edit Logo</a>
+                    <a ng-click="toggleLogo()" id="remove_logo" href="" >{{ logoRemoved ? 'Show' : 'Hide' }} logo</a>
+                </div>
             </div>
         </div>
     </div>
+    <!--<div class="row infos">-->
+        <!--<div class="col-xs-6">-->
+            <!--<div class="input-container"><input type="text" ng-model="invoice.customer_info.name"/></div>-->
+            <!--<div class="input-container"><input type="text" ng-model="invoice.customer_info.web_link"/></div>-->
+            <!--<div class="input-container"><input type="text" ng-model="invoice.customer_info.address1"/></div>-->
+            <!--<div class="input-container"><input type="text" ng-model="invoice.customer_info.address2"/></div>-->
+            <!--<div class="input-container"><input type="text" ng-model="invoice.customer_info.postal"/></div>-->
+            <!--<div class="input-container" data-ng-hide='printMode'>-->
+                <!--<select ng-model='currencySymbol' ng-options='currency.symbol as currency.name for currency in availableCurrencies'></select>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-xs-6 right">-->
+            <!--<div class="input-container"><input type="text" ng-model="invoice.company_info.name"/></div>-->
+            <!--<div class="input-container"><input type="text" ng-model="invoice.company_info.web_link"/></div>-->
+            <!--<div class="input-container"><input type="text" ng-model="invoice.company_info.address1"/></div>-->
+            <!--<div class="input-container"><input type="text" ng-model="invoice.company_info.address2"/></div>-->
+            <!--<div class="input-container"><input type="text" ng-model="invoice.company_info.postal"/></div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="items-table">
+        <div class="row header">
+            <div class="col-xs-1">&nbsp;</div>
+            <div class="col-xs-5">Description</div>
+            <div class="col-xs-2">Quantity</div>
+            <div class="col-xs-2">Cost</div>
+            <div class="col-xs-2 text-right">Total</div>
+        </div>
+        <div class="row invoice-item" ng-repeat="item in invoice.items" ng-animate="'slide-down'">
+            <div class="col-xs-1 remove-item-container">
+                <a href="" ng-hide="printMode" ng-click="removeItem(item)" class="btn btn-danger">[X]</a>
+            </div>
+            <div class="col-xs-5 input-container">
+                <input ng-model="item.description" placeholder="Description" />
+            </div>
+            <div class="col-xs-2 input-container">
+                <input ng-model="item.qty" value="1" size="4" ng-required="required" ng-validate="integer" placeholder="Quantity" />
+            </div>
+            <div class="col-xs-2 input-container">
+                <input ng-model="item.cost" value="0.00" ng-required="required" ng-validate="number" size="6" placeholder="Cost" />
+            </div>
+            <div class="col-xs-2 text-right input-container">
+                {{item.cost * item.qty | currency: currencySymbol}}
+            </div>
+        </div>
+        <div class="row invoice-item">
+            <div class="col-xs-12 add-item-container" ng-hide="printMode">
+                <a class="btn btn-primary" href="" ng-click="addItem()" >[+]</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-10 text-right">Sub Total</div>
+            <div class="col-xs-2 text-right">{{invoiceSubTotal() | currency: currencySymbol}}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-10 text-right">Tax(%): <input ng-model="invoice.tax" ng-validate="number" style="width:43px"/></div>
+            <div class="col-xs-2 text-right">{{calculateTax() | currency: currencySymbol}}</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-10 text-right">Grand Total:</div>
+            <div class="col-xs-2 text-right">{{calculateGrandTotal() | currency: currencySymbol}}</div>
+        </div>
+    </div>
+    <div class="row noPrint actions">
+        <a href="#" class="btn btn-primary" ng-show="printMode" ng-click="printInfo()">Print</a>
+        <a href="#" class="btn btn-primary" ng-click="clearLocalStorage()">Reset</a>
+        <a href="#" class="btn btn-primary" ng-hide="printMode" ng-click="printMode = true;">Turn On Print Mode</a>
+        <a href="#" class="btn btn-primary" ng-show="printMode" ng-click="printMode = false;">Turn Off Print Mode</a>
+    </div>
+</div>
+
+<div ng-hide="printMode" class="copy noPrint">
+    <a href="http://jasdeep.ca/?utm_source=angular_invoicing">Jasdeep Singh</a> &amp;
+    <a href="http://github.com/manpreetrules">Manpreet Singh</a>
+    Made with
+    <span class="love">&#9829;</span> in Toronto by
+    <a href="http://metawarelabs.com/?utm_source=angular_invoicing">Metaware Labs Inc.</a>
 </div>

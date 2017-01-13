@@ -1,31 +1,148 @@
-<div class="container" style="margin-bottom: 10px;" >
+
+<div class="container" style="margin-bottom: 100px;" >
 
 </div>
-<div class="container" style="margin-bottom: 10px;" >
 
-</div>
-<div class="container" style="margin-bottom: 10px;" >
 
-</div>
-<div class="container" style="margin-bottom: 10px;" >
-
-</div>
-<div class="container">
-    <section style="margin: 50px">
-        <form name="productForm">
-            <div class="form-group">
-                <label for="product_ID">Product ID</label>
-                <input type="text" id="product_ID" ng-model="product.id" class="form-control"/>
-                <label for="product_Name">Product Name</label>
-                <input type="text" id="product_Name" ng-model="product.name" class="form-control"/>
-                <label for="product_Quantity">Quantity</label>
-                <input type="text" id="product_Quantity" ng-model="product.quantity" class="form-control"/>
-                <label for="product_amount">Amount</label>
-                <input type="text" id="product_amount" ng-model="product.amount" class="form-control"/>
-                <label for="product_Description">Description</label>
-                <input type="text" id="product_Description" ng-model="product.description" class="form-control"/>
-                <button type="submit" class="btn btn-primary" ng-click="addProduct(product)">Add/Update Product</button>
+<div class="container-fluid">
+    <form name="productForm"  method="POST" >
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <span>Product ID :</span>
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" name="product_id" maxlength="100" ng-model="product.id" placeholder="Product Id" required="required"/>
+                    </div>
+                </div>
             </div>
-        </form>
-    </section>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <span>Product Name :</span>
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" name="product_name" maxlength="100" ng-model="product.name" placeholder="Product Name" required="required"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <span>Product Short Name :</span>
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" name="product_short_name" maxlength="100" ng-model="product.short_name" placeholder="Product Short Name" required="required"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <span>Product quantity :</span>
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" name="product_quantity" maxlength="100" ng-model="product.quantity" placeholder="Product quantity" required="required"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <span>Buying Cost :</span>
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" name="buying_cost" maxlength="100" ng-model="product.buying_cost" placeholder="Buying Cost" required="required"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <span>Selling Cost :</span>
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" name="selling_cost" maxlength="100" ng-model="product.selling_cost" placeholder="Selling Cost" required="required"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <span>Product MRP :</span>
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" calculate-margin="" name="product_MRP" maxlength="100" ng-model="product.mrp" placeholder="MRP" required="required"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <span>Discount(%) :</span>
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" calculate-discounted-selling-price="" name="product_discount" maxlength="100" ng-model="product.discount" placeholder="Product discount"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <span>Margin (Rs) :</span>
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" name="product_margin_amount" maxlength="100"  ng-readonly="true" ng-model="product.margin_amount" placeholder="Margin (in Rupees)"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <span>Margin (%) :</span>
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" name="product_margin_percentage" maxlength="100" ng-model="product.margin_percentage" ng-readonly="true" placeholder="Margin (in Percentage)"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <span><button type="submit" class="btn btn-primary" ng-click="addProduct(product)">Add/Update Product</button></span>
+            </div>
+            <div class="col-sm-3">
+                <span><button type="submit" class="btn btn-primary" ng-click="resetData(product)">Reset</button></span>
+            </div>
+        </div>
+    </form>
 </div>
+
