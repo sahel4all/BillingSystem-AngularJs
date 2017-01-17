@@ -64,4 +64,37 @@ REFERENCES products (product_id) MATCH SIMPLE
 ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 
+CREATE SEQUENCE INVOICE_SEQUENCE
+INCREMENT BY 1
+NO MINVALUE
+MAXVALUE 1000000
+START WITH 1
+CACHE 1;
+
+CREATE TABLE IF NOT EXISTS INVOICE
+(
+invoice_id integer NOT NULL,
+totalAmount numeric(15,6),
+CONSTRAINT INVOICE_pkey PRIMARY KEY (invoice_id)
+)
+
+CREATE TABLE IF NOT EXISTS SALES
+(
+sale_id SERIAL NOT NULL,
+product_id NOT NULL,
+invoice_id NOT NULL,
+name character varying(50),
+quantity integer,
+discount numeric(15,6),
+discount numeric(15,6),
+totalAmount numeric(15,6),
+CONSTRAINT SALES_pkey PRIMARY KEY (sale_id),
+CONSTRAINT sales_fkey FOREIGN KEY (invoice_id)
+REFERENCES INVOICE (invoice_id) MATCH SIMPLE
+ON UPDATE NO ACTION ON DELETE NO ACTION,
+CONSTRAINT sales_fkey2 FOREIGN KEY (product_id)
+REFERENCES products (product_id) MATCH SIMPLE
+ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+
 

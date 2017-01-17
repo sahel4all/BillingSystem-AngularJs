@@ -1,10 +1,4 @@
-
-<div class="container" style="margin-bottom: 100px;" >
-
-</div>
-
-
-<div class="container" width="800px" id="invoice" >
+<div class="container-fluid" id="invoice"  >
     <div class="row">
         <div class="col-xs-12 heading">
             INVOICE
@@ -20,87 +14,94 @@
             <input type="file" id="imgInp" />
             <img ng-hide="logoRemoved" id="company_logo" ng-src="resources/images/logo.png" alt="your image" width="150" />
             <div>
-                <div class="noPrint" ng-hide="printMode">
+                <div class="noPrint">
                     <a ng-click="editLogo()" href="" >Edit Logo</a>
                     <a ng-click="toggleLogo()" id="remove_logo" href="" >{{ logoRemoved ? 'Show' : 'Hide' }} logo</a>
                 </div>
             </div>
         </div>
     </div>
-    <!--<div class="row infos">-->
-        <!--<div class="col-xs-6">-->
-            <!--<div class="input-container"><input type="text" ng-model="invoice.customer_info.name"/></div>-->
+    <div class="row infos">
+        <div class="col-xs-6">
+            <div class="input-container"><b><input type="text" ng-model="invoice.customer_info.name"/></b></div>
             <!--<div class="input-container"><input type="text" ng-model="invoice.customer_info.web_link"/></div>-->
             <!--<div class="input-container"><input type="text" ng-model="invoice.customer_info.address1"/></div>-->
             <!--<div class="input-container"><input type="text" ng-model="invoice.customer_info.address2"/></div>-->
-            <!--<div class="input-container"><input type="text" ng-model="invoice.customer_info.postal"/></div>-->
-            <!--<div class="input-container" data-ng-hide='printMode'>-->
-                <!--<select ng-model='currencySymbol' ng-options='currency.symbol as currency.name for currency in availableCurrencies'></select>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-xs-6 right">-->
-            <!--<div class="input-container"><input type="text" ng-model="invoice.company_info.name"/></div>-->
+            <div class="input-container"><b><input type="text" ng-model="invoice.customer_info.postal"/></b></div>
+        </div>
+        <div class="col-xs-6 right">
+            <div class="input-container"><b><input type="text" ng-model="invoice.company_info.name"/></b></div>
             <!--<div class="input-container"><input type="text" ng-model="invoice.company_info.web_link"/></div>-->
             <!--<div class="input-container"><input type="text" ng-model="invoice.company_info.address1"/></div>-->
             <!--<div class="input-container"><input type="text" ng-model="invoice.company_info.address2"/></div>-->
-            <!--<div class="input-container"><input type="text" ng-model="invoice.company_info.postal"/></div>-->
-        <!--</div>-->
-    <!--</div>-->
+            <div class="input-container"><b><input type="text" ng-model="invoice.company_info.postal"/></b></div>
+        </div>
+    </div>
     <div class="items-table">
         <div class="row header">
             <div class="col-xs-1">&nbsp;</div>
-            <div class="col-xs-5">Description</div>
+            <div class="col-xs-2">Item Code</div>
+            <div class="col-xs-3">Description</div>
             <div class="col-xs-2">Quantity</div>
+            <div class="col-xs-2">Discount (%)</div>
             <div class="col-xs-2">Cost</div>
             <div class="col-xs-2 text-right">Total</div>
         </div>
         <div class="row invoice-item" ng-repeat="item in invoice.items" ng-animate="'slide-down'">
             <div class="col-xs-1 remove-item-container">
-                <a href="" ng-hide="printMode" ng-click="removeItem(item)" class="btn btn-danger">[X]</a>
-            </div>
-            <div class="col-xs-5 input-container">
-                <input ng-model="item.description" placeholder="Description" />
+                <a href="" ng-click="removeItem(item)" class="btn btn-danger">[X]</a>
             </div>
             <div class="col-xs-2 input-container">
-                <input ng-model="item.qty" value="1" size="4" ng-required="required" ng-validate="integer" placeholder="Quantity" />
+                <input ng-model="item.code" placeholder="Product Code" />
+            </div>
+            <div class="col-xs-3 input-container">
+                <input ng-model="item.description" placeholder="Product Description" />
             </div>
             <div class="col-xs-2 input-container">
-                <input ng-model="item.cost" value="0.00" ng-required="required" ng-validate="number" size="6" placeholder="Cost" />
+                <input ng-model="item.quantity" value="1" size="4" ng-required="" ng-validate="integer" placeholder="Quantity" />
+            </div>
+            <div class="col-xs-2 input-container">
+                <input ng-model="item.discount" size="6" value="0" ng-required="" ng-validate="integer" placeholder="Discount" />
+            </div>
+            <div class="col-xs-2 input-container">
+                <input ng-model="item.cost" value="0.00" ng-required="" ng-validate="number" size="6" placeholder="Unit Cost" />
             </div>
             <div class="col-xs-2 text-right input-container">
-                {{item.cost * item.qty | currency: currencySymbol}}
+                {{item.cost * item.quantity}}
             </div>
         </div>
         <div class="row invoice-item">
-            <div class="col-xs-12 add-item-container" ng-hide="printMode">
-                <a class="btn btn-primary" href="" ng-click="addItem()" >[+]</a>
+            <div class="col-xs-12 add-item-container">
+                <a class="btn btn-primary" ng-click="addItem()" >[+]</a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xs-10 text-right">Sub Total</div>
-            <div class="col-xs-2 text-right">{{invoiceSubTotal() | currency: currencySymbol}}</div>
-        </div>
-        <div class="row">
-            <div class="col-xs-10 text-right">Tax(%): <input ng-model="invoice.tax" ng-validate="number" style="width:43px"/></div>
-            <div class="col-xs-2 text-right">{{calculateTax() | currency: currencySymbol}}</div>
-        </div>
+        <!--<div class="form-group control-label col-xs-10">-->
+            <!--<div class="col-sm-4 col-sm-offset-2">-->
+                <!--<button type="submit" class="btn btn-primary" ng-click="addItem()" > Add </button>-->
+            <!--</div >-->
+        <!--</div>-->
+        <!--<div class="row">-->
+            <!--<div class="col-xs-10 text-right">Sub Total</div>-->
+            <!--<div class="col-xs-2 text-right">{{invoiceSubTotal()}}</div>-->
+        <!--</div>-->
+        <!--<div class="row">-->
+            <!--<div class="col-xs-10 text-right">Tax(%): <input ng-model="invoice.tax" ng-validate="number" style="width:43px"/></div>-->
+            <!--<div class="col-xs-2 text-right">{{calculateTax()}}</div>-->
+        <!--</div>-->
         <div class="row">
             <div class="col-xs-10 text-right">Grand Total:</div>
-            <div class="col-xs-2 text-right">{{calculateGrandTotal() | currency: currencySymbol}}</div>
+            <div class="col-xs-2 text-right"><b>&#8377; {{calculateGrandTotal()}}</b></div>
         </div>
     </div>
     <div class="row noPrint actions">
-        <a href="#" class="btn btn-primary" ng-show="printMode" ng-click="printInfo()">Print</a>
-        <a href="#" class="btn btn-primary" ng-click="clearLocalStorage()">Reset</a>
-        <a href="#" class="btn btn-primary" ng-hide="printMode" ng-click="printMode = true;">Turn On Print Mode</a>
-        <a href="#" class="btn btn-primary" ng-show="printMode" ng-click="printMode = false;">Turn Off Print Mode</a>
+        <a href="" class="btn btn-primary" ng-click="saveInvoice()">Submit Invoice</a>
+        <a href="" class="btn btn-primary" ng-click="printInfo()">Print</a>
+        <a href="" class="btn btn-primary" ng-click="clearLocalStorage()">Reset</a>
+        <!--<a href="" class="btn btn-primary" ng-hide="printMode" ng-click="printMode = true;">Turn On Print Mode</a>-->
+        <!--<a href="" class="btn btn-primary" ng-show="printMode" ng-click="printMode = false;">Turn Off Print Mode</a>-->
     </div>
 </div>
 
-<div ng-hide="printMode" class="copy noPrint">
-    <a href="http://jasdeep.ca/?utm_source=angular_invoicing">Jasdeep Singh</a> &amp;
-    <a href="http://github.com/manpreetrules">Manpreet Singh</a>
-    Made with
-    <span class="love">&#9829;</span> in Toronto by
-    <a href="http://metawarelabs.com/?utm_source=angular_invoicing">Metaware Labs Inc.</a>
+<div class="copy noPrint">
+    <a href="">Developed by Creative Guys</a>
 </div>

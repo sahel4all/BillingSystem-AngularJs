@@ -94,6 +94,20 @@ mainApp.config(['$routeProvider','$httpProvider', function ($routeProvider, $htt
         return deferred.promise;
     };
 
+}]).service('GetInvoiceNumberService',['$http','$q',function ($http,$q) {
+    var deferred=$q.defer();
+
+    this.fetchDetails=function (id) {
+        $http.get('getNextSeqVal').then(function (response) {
+            deferred.resolve(response);
+            //alert("response.data.name in productHelper:"+response.data.name );
+        },function (response) {
+            deferred.reject(response);
+        })
+
+        return deferred.promise;
+    };
+
 }]).service('GenerateBillService',['$http','$q',function ($http,$q) {
     var deferred=$q.defer();
 
@@ -111,7 +125,6 @@ mainApp.config(['$routeProvider','$httpProvider', function ($routeProvider, $htt
             txnDetails.totalAmount=item.total;
             coll.push(txnDetails);
         }
-
 
         $http.put('generateBill',coll,{}).success(function (response) {
             deferred.resolve(response);
@@ -166,13 +179,126 @@ mainApp.config(['$routeProvider','$httpProvider', function ($routeProvider, $htt
 
         }
     }
-}]).constant('DEFAULT_INVOICE', {
-        tax: 13.00,
-        company_info: {
-            name: 'Smart Supermarket ',
-           // web_link: 'www.metawarelabs.com',
-            address1: 'Sunctiy',
-            address2: 'Hyderabad',
+}])// The default logo for the invoice
+    .constant('DEFAULT_LOGO', 'images/logo.png')
+
+    // The invoice displayed when the user first uses the app
+    .constant('DEFAULT_INVOICE', {
+        tax: 0.00,
+        invoice_number: 10,
+        customer_info: {
+            name: 'Abid Mohammed',
+            web_link: 'John Doe Designs Inc.',
+            address1: '1 Infinite Loop',
+            address2: 'Cupertino, California, US',
             postal: '500086'
+        },
+        company_info: {
+            name: 'CreativeGuys',
+            web_link: 'www.metawarelabs.com',
+            address1: '123 Yonge Street',
+            address2: 'Toronto, ON, Canada',
+            postal: '500008'
+        },
+        items:[
+            { code:"ABC123",quantity: 1, description: 'Gadget', discount:"5",cost: 9.95 }
+        ]
+    })
+
+    // Service for accessing local storage
+    .service('LocalStorage', [function() {
+
+        var Service = {};
+
+        // Returns true if there is a logo stored
+        var hasLogo = function() {
+            return !!localStorage['logo'];
+        };
+
+        // Returns a stored logo (false if none is stored)
+        Service.getLogo = function() {
+            if (hasLogo()) {
+                return localStorage['logo'];
+            } else {
+                return false;
+            }
+        };
+
+        Service.setLogo = function(logo) {
+            localStorage['logo'] = logo;
+        };
+
+        // Checks to see if an invoice is stored
+        var hasInvoice = function() {
+            return !(localStorage['invoice'] == '' || localStorage['invoice'] == null);
+        };
+
+        // Returns a stored invoice (false if none is stored)
+        Service.getInvoice = function() {
+            if (hasInvoice()) {
+                return JSON.parse(localStorage['invoice']);
+            } else {
+                return false;
+            }
+        };
+
+        Service.setInvoice = function(invoice) {
+            localStorage['invoice'] = JSON.stringify(invoice);
+        };
+
+        // Clears a stored logo
+        Service.clearLogo = function() {
+            localStorage['logo'] = '';
+        };
+
+        // Clears a stored invoice
+        Service.clearinvoice = function() {
+            localStorage['invoice'] = '';
+        };
+
+        // Clears all local storage
+        Service.clear = function() {
+            localStorage['invoice'] = '';
+            Service.clearLogo();
+        };
+
+        return Service;
+
+    }])
+
+    .service('Currency', [function(){
+
+        var service = {};
+
+        service.all = function() {
+            return [
+                {
+                    name: 'British Pound (£)',
+                    symbol: '£'
+                },
+                {
+                    name: 'Canadian Dollar ($)',
+                    symbol: 'CAD $ '
+                },
+                {
+                    name: 'Euro (€)',
+                    symbol: '€'
+                },
+                {
+                    name: 'Indian Rupee (₹)',
+                    symbol: '&#8377;'
+                },
+                {
+                    name: 'Norwegian krone (kr)',
+                    symbol: 'kr '
+                },
+                {
+                    name: 'US Dollar ($)',
+                    symbol: '$'
+                }
+            ]
         }
-    });
+
+        return service;
+
+    }]);

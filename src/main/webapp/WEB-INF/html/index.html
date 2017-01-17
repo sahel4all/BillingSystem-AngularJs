@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="resources/bower_components/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="resources/css/style.css" />
 </head>
-<body>
+<body data-spy="scroll">
 <nav class="navbar navbar-inverse navbar-fixed-top" id="BMSApp-header">
     <div class="container">
         <a href="#"><p style="text-align:center">Billing Management System</p></a>
@@ -26,13 +26,18 @@
     </div>
 
 </nav>
+<div ng-view="" class="view"></div>
+
+<footer>
+    <p>&copy; Copyright 2017 Retail care </p>
+</footer>
 <script src="resources/bower_components/angular/angular.min.js"></script>
 <script src="resources/app/js/angularApp.js"></script>
 <script src="resources/bower_components/angular-route/angular-route.min.js"></script>
 <script src="resources/app/js/controllers/ProductController.js"></script>
 <script src="resources/app/js/controllers/ProductsController.js"></script>
 <script src="resources/app/js/controllers/BillController.js"></script>
-<ng-view > </ng-view>
+<!--<ng-view > </ng-view>-->
 <!--<button type="submit" ng-click="getProduct(1)">click pls</button>-->
 </body>
 </html>

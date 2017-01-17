@@ -1,8 +1,10 @@
 package org.billing.system.controller;
 
+import org.billing.system.model.Invoice;
 import org.billing.system.model.Product;
 import org.billing.system.repository.ProductRepository;
 import org.billing.system.service.ProductService;
+import org.billing.system.service.mapper.InvoiceService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 
+import java.math.BigInteger;
 import java.util.List;
 
 /**
@@ -30,6 +33,8 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+    @Autowired
+    private InvoiceService invoiceService;
 
     @RequestMapping(value="/product/{id}",method = RequestMethod.GET)
     public ResponseEntity getProducts(@PathVariable final long id){
@@ -57,5 +62,13 @@ public class ProductController {
         Product productNew=productService.insertProduct(product);
         System.out.println("productNew::"+productNew);
         return new ResponseEntity(product,HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/getNextSeqVal",method = RequestMethod.GET)
+    public ResponseEntity getNextSeqVal(){
+        BigInteger invoiceSeq=invoiceService.getNextSeqVal();
+        //Invoice invoice=new Invoice();
+        System.out.println("invoice::"+invoiceSeq);
+        return new ResponseEntity(invoiceSeq,HttpStatus.OK);
     }
 }
